@@ -7,10 +7,10 @@
 void setup() {
   Serial.begin(115200);
 
-  init_board();
+  board_init();
   Serial.print("[SYS] BOARD initialized successfully !\n");
   
-  init_app();
+  app_init();
   Serial.print("[SYS] APP initialized successfully !\n");
 }
 

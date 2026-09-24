@@ -5,7 +5,7 @@
 #include "drivers/rtc.h"
 #include "config.h"
 
-void init_board(){
-    init_dbg_led();
-    init_rtc();
+void board_init(){
+    led_dbg_init();
+    rtc_init();
 }

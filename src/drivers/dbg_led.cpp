@@ -8,14 +8,14 @@
 #include "config.h"
 
 
-void init_dbg_led(){
+void led_dbg_init(){
     pinMode(DBG_LED, OUTPUT);
     digitalWrite(DBG_LED, LOW);
     Serial.print("[DBG_LED] Initialized successfully!\n");
-    set_led_status(LED_OK);
+    set_led_dbg_status(LED_OK);
 }
 
-void set_led_status(int status){
+void set_led_dbg_status(int status){
     switch (status)
     {
     case LED_OK:

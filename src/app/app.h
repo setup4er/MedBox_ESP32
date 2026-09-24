@@ -8,6 +8,6 @@
  */
 
 void app_update();
-void init_app();
+void app_init();
 
 #endif // APP_H

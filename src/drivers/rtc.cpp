@@ -11,14 +11,14 @@
 static iarduino_RTC rtc(RTC_DS1302, RTC_RST_PIN, RTC_CLK_PIN, RTC_DAT_PIN);
 
 
-bool init_rtc(){
+bool rtc_init(){
     bool res = rtc.begin();
     if(!res){
         Serial.println("[RTC] ERROR !!! Initialized unsuccessfully!");
-        set_led_status(LED_ERR);
+        set_led_dbg_status(LED_ERR);
         return false;
     }
-    set_led_status(OK);
+    set_led_dbg_status(OK);
     Serial.println("[RTC] Initialized successfully!");
     Serial.print("[RTC] Now time: ");
     Serial.println(rtc.gettime("[H:i:s, D(w)]"));

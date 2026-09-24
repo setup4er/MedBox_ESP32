@@ -7,7 +7,7 @@
  * @description BOARD LED FILE
  */
 
-void init_dbg_led();
-void set_led_status(int status);
+void led_dbg_init(); // Инициализация отладочного светодиода
+void set_led_dbg_status(int status); // Функция для установки статуса отладочного светодиода на плате
 
 #endif // DBG_LED_H

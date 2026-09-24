@@ -7,6 +7,6 @@
  * @description INIT BOARD
  */
 
-void init_board();
+void board_init();
 
 #endif // BOARD_H
