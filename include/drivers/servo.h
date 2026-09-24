@@ -7,6 +7,6 @@
  * @description Servo module file
  */
 
-
+bool init_servo();
 
 #endif // SERVO_H
