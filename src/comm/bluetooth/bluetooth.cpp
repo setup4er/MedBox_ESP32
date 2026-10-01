@@ -17,6 +17,8 @@ static NimBLECharacteristic *txChar = nullptr; //Отправка
 
 static NimBLEAdvertising *pAdv = nullptr;
 
+static String _rxBuffer;
+
 class ServerCallback : public NimBLEServerCallbacks {
 public:
     void onConnect(NimBLEServer* pServer, NimBLEConnInfo& connInfo) override {
@@ -33,6 +35,21 @@ public:
     }
 };
 
+class RxCallback : public NimBLECharacteristicCallbacks {
+public:
+    void onWrite(NimBLECharacteristic *pCharacteristic, NimBLEConnInfo &connInfo) override{
+        std::string res = pCharacteristic->getValue();
+        if(res.empty()){
+            Serial.println("[BLE_RX] Error. Result of message is empty!");
+            return;
+        }
+        _rxBuffer = String(res.c_str());
+
+        Serial.print("[BLE_RX] Result of message: ");
+        Serial.println(_rxBuffer);
+    }
+};
+
 void bluetooth_init(){
     NimBLEDevice::init(BLE_DEVICE_NAME);
 
@@ -43,6 +60,7 @@ void bluetooth_init(){
     
     // callback
     pServer->setCallbacks(new ServerCallback());
+    rxChar->setCallbacks(new RxCallback());
 
     pAdv = NimBLEDevice::getAdvertising();
     pAdv->addServiceUUID(BLE_UUID_SERVICE);
