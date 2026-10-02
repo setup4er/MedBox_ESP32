@@ -12,13 +12,6 @@ void handle_cmd(const String& cmd) {
     Serial.println(cmd);
 
     if (cmd == "GET_TIME") {
-        char buf[64];
-        snprintf(buf, sizeof(buf), "TIME %s", rtc_get_time());
-        send_bluetooth_message(buf);
-        return;
-    }
-    
-    if (cmd == "GET_TIME_ARR") {
     rtc_time_t t;
     if (!rtc_get_time(&t)) {
         send_bluetooth_message("ERROR rtc_get_time");
@@ -30,7 +23,7 @@ void handle_cmd(const String& cmd) {
              t.hour, t.minute, t.second, t.weekday);
     send_bluetooth_message(buf);
     return;
-}
+    }
 
     if (cmd.startsWith("SET_TIME ")) {
         int h, m, s, wd;
