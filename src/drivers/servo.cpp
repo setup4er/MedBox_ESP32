@@ -8,6 +8,6 @@
 
 
 
-bool init_servo(){
+bool servo_init(){
 
 }

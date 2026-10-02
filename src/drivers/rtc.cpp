@@ -26,23 +26,23 @@ bool rtc_init(){
     return true;
 }
 
-void rtc_set_time(int16_t hour, int16_t min, int16_t sec, int16_t week_num) {
+bool rtc_set_time(int16_t hour, int16_t min, int16_t sec, int16_t week_num) {
 
     if (hour < 0 || hour > 23) {
         Serial.println("[RTC] rtc_set_time: invalid hour");
-        return;
+        return false;
     }
     if (min < 0 || min > 59) {
         Serial.println("[RTC] rtc_set_time: invalid minute");
-        return;
+        return false;
     }
     if (sec < 0 || sec > 59) {
         Serial.println("[RTC] rtc_set_time: invalid second");
-        return;
+        return false;
     }
     if (week_num < 0 || week_num > 6) {
         Serial.println("[RTC] rtc_set_time: invalid weekday (0-6)");
-        return;
+        return false;
     }
     // settime(sec, min, hour, day, month, year, weekday)
     rtc.settime(
@@ -57,6 +57,7 @@ void rtc_set_time(int16_t hour, int16_t min, int16_t sec, int16_t week_num) {
 
     Serial.printf("[RTC] Time set: %02d:%02d:%02d (wd=%d)\n",
                   hour, min, sec, week_num);
+    return true;
 }
 
 bool rtc_get_time(rtc_time_t* out){

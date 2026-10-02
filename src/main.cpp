@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
-#include "app/app.h"
-#include "board/board.h"
+#include "app.h"
+#include "board.h"
 
 
 void setup() {
