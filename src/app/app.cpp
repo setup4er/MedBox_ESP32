@@ -18,9 +18,10 @@ void app_init(){
 void app_update(){
     if(has_bluetooth_message()){
         _bluetoothMessage = get_bluetooth_message();
+        
         Serial.print("[APP] RX Message in app module: ");
         Serial.println(_bluetoothMessage);
-        // handle_cmd();
-        send_bluetooth_message(_bluetoothMessage);
+
+        // handle_cmd(_bluetoothMessage);
     }
 }
