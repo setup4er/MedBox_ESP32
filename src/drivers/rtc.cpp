@@ -7,6 +7,7 @@
 // Project includes
 #include "drivers/dbg_led.h"
 #include "config.h"
+#include "types.h"
 
 static iarduino_RTC rtc(RTC_DS1302, RTC_RST_PIN, RTC_CLK_PIN, RTC_DAT_PIN);
 

@@ -6,14 +6,8 @@
  * @date 2026-09-24
  * @description RTC Module header file
  */
-#include <cstdint>
 
-typedef struct {
-    uint8_t hour;      // 0-23
-    uint8_t minute;    // 0-59
-    uint8_t second;    // 0-59
-    uint8_t weekday;   // 0-6 (Вс-Пн-Вт-...-Сб)
-} rtc_time_t;
+#include "types.h"
 
 bool rtc_get_time(rtc_time_t* out); // Функция геттер. Присваевает аргументу rtc_time_t поля: часы(24-формат), минуты, секунды, день недели (0-6) 
 char *rtc_get_time(); //Возврат времени и день недели в текстовом формате
