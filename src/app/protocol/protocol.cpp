@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 // Project includes
-#include "drivers/rtc.h"
+#include "drivers.h"
 #include "comm/bluetooth.h"
 
 void handle_cmd(const String& cmd) {

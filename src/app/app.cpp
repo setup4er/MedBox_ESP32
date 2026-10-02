@@ -5,7 +5,7 @@
 
 // Project headers
 #include "config.h"
-#include "drivers/dbg_led.h"
+#include "drivers.h"
 #include "comm/bluetooth.h"
 #include "protocol/protocol.h"
 
