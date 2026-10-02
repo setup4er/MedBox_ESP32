@@ -5,7 +5,6 @@
 #include <NimBLEDevice.h>
 
 // Project includes
-#include "drivers/rtc.h"
 #include "drivers/dbg_led.h"
 #include "config.h"
 
@@ -17,7 +16,8 @@ static NimBLECharacteristic *txChar = nullptr; //Отправка
 
 static NimBLEAdvertising *pAdv = nullptr;
 
-static String _rxBuffer;
+static String _rxBuffer = "";
+static bool _hasMessage = false;
 
 class ServerCallback : public NimBLEServerCallbacks {
 public:
@@ -47,6 +47,8 @@ public:
 
         Serial.print("[BLE_RX] Result of message: ");
         Serial.println(_rxBuffer);
+        
+        _hasMessage = true;
     }
 };
 
@@ -73,4 +75,23 @@ void bluetooth_init(){
 
     Serial.println("[BLE] Initialization successfully!");
     set_led_dbg_status(LED_OK);
+}
+
+void send_bluetooth_message(const String& msg) {
+    if (!txChar) return;
+    txChar->setValue(msg.c_str());
+    txChar->notify();
+}
+
+
+bool has_bluetooth_message() {
+    return _hasMessage;
+}
+
+
+String get_bluetooth_message(){
+    String result = _rxBuffer;
+    _rxBuffer = "";
+    _hasMessage = false;
+    return result;
 }
