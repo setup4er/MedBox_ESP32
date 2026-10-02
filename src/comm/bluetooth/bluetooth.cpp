@@ -45,7 +45,7 @@ public:
         }
         _rxBuffer = String(res.c_str());
 
-        Serial.print("[BLE_RX] Result of message: ");
+        Serial.print("[BLE_RX] Message was delivered successfully! Content: ");
         Serial.println(_rxBuffer);
         
         _hasMessage = true;
@@ -81,6 +81,9 @@ void send_bluetooth_message(const String& msg) {
     if (!txChar) return;
     txChar->setValue(msg.c_str());
     txChar->notify();
+
+    Serial.print("[BLE_TX] Message sended successfully! Content: ");
+    Serial.println(msg.c_str());
 }
 
 

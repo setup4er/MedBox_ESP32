@@ -21,5 +21,6 @@ void app_update(){
         Serial.print("[APP] RX Message in app module: ");
         Serial.println(_bluetoothMessage);
         // handle_cmd();
+        send_bluetooth_message(_bluetoothMessage);
     }
 }

@@ -11,7 +11,7 @@
 
 void bluetooth_init();
 
-bool send_bluetooth_message(String msg);
+void send_bluetooth_message(const String &msg);
 String get_bluetooth_message();
 bool has_bluetooth_message();
 
