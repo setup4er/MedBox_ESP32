@@ -17,7 +17,6 @@ void app_init(){
 
 /*      Main cycle    */
 void app_update(){
-    toggleServo(1);
     if(has_bluetooth_message()){
         _bluetoothMessage = get_bluetooth_message();
 
