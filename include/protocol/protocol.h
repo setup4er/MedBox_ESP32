@@ -8,6 +8,6 @@
  */
 #include "Arduino.h"
 
-void handle_cmd(const String& cmd);
+void handle_cmd(const String& cmd); // Функция для обработки команд для работы с ESP32 и драйверами.
 
 #endif // PROTOCOL_H

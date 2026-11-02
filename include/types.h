@@ -16,6 +16,3 @@ typedef struct {
 } rtc_time_t;
 
 #endif // TYPES_H
-
-
-
