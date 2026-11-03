@@ -28,7 +28,7 @@ static const int servoPins[] = {
     SERVO_7_PWM_PIN
 };
 
-static bool servoStatus[7] = {false, false, false, false, false, false, false};
+static int currentSector[7] = {0, 0, 0, 0, 0, 0, 0}; 
 static int _speedDelay = 5;
 
 void servo_set_speed(int delay_ms) {
@@ -37,33 +37,46 @@ void servo_set_speed(int delay_ms) {
     _speedDelay = delay_ms;
 }
 
-void toggleServo(int servoNum) {
-    if (servoNum < 1 || servoNum > 7) return;
-
-    int index = servoNum - 1;
-    Servo& servo = *servos[index];
-
-    servoStatus[index] = !servoStatus[index];
-
-    int targetAngle = servoStatus[index] ? 180 : 0;
+static void moveToAngle(Servo& servo, int targetAngle) {
     int currentAngle = servo.read();
-
     while (currentAngle != targetAngle) {
         currentAngle += (currentAngle < targetAngle) ? 1 : -1;
         servo.write(currentAngle);
         delay(_speedDelay);
     }
+    delay(200); 
+}
 
-    delay(500);
+void servo_move_to_sector(int servoNum, int targetSector) {
+    if (servoNum < 1 || servoNum > 7) return;
+    if (targetSector < 0 || targetSector > 3) return;
+
+    int index = servoNum - 1;
+
+    if (currentSector[index] == targetSector) return;
+
+    Servo& servo = *servos[index];
+
+    int targetAngle = 0;
+    if (targetSector == 0) targetAngle = 0;
+    else if (targetSector == 1) targetAngle = 60;
+    else if (targetSector == 2) targetAngle = 120;
+    else if (targetSector == 3) targetAngle = 180;
+
+    Serial.printf("[SERVO] Moving servo %d to sector %d (Angle: %d)\n", servoNum, targetSector, targetAngle);
+
+    moveToAngle(servo, targetAngle);
+    
+    currentSector[index] = targetSector;
 }
 
 bool servo_init() {
-    servo_set_speed(5);
+    servo_set_speed(10); 
 
     for (int i = 0; i < 7; i++) {
         servos[i]->attach(servoPins[i]);
         servos[i]->write(0);
-        servoStatus[i] = false;
+        currentSector[i] = 0; 
 
         delay(200);
     }

@@ -13,5 +13,6 @@
 #include "drivers/dbg_led.h"
 #include "drivers/rtc.h"
 #include "drivers/servo.h"
+#include "drivers/led.h"
 
 #endif // DRIVERS_H

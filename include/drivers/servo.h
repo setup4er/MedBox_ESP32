@@ -9,6 +9,6 @@
 #include "ESP32Servo.h"
 
 bool servo_init();
-void toggleServo(int servoNum); // Функция для изменения угла сервопривода. &servo - ссылка на экземпляр. targetAngle - угол.
+void servo_move_to_sector(int servoNum, int targetSector); // Функция для изменения угла сервопривода взависимости от сектора.
 void servo_set_speed(int delay_ms); // Функция для установки скорости сервоприводов в ms.
 #endif // SERVO_H
